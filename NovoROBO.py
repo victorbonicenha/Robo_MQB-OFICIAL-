@@ -70,10 +70,11 @@ def run(playwright: Playwright) -> None:
 
         linha_mqb = iframe.locator("button:has-text('Detalhes')").nth(nth_value)
         linha_mqb.click(timeout=5000)
-        sleep(5)
 
         pyautogui.click(x=1000, y=500)
         pyautogui.press("f11")
+
+        page.evaluate("document.body.style.zoom='90%'")
 
     except TimeoutError as te:
         print(f"[ERRO] Timeout ao tentar clicar nos botões dentro do iframe: {te}")
@@ -81,8 +82,6 @@ def run(playwright: Playwright) -> None:
     except Exception as e:
         print(f"[ERRO] Erro ao interagir com o iframe: {e}")
         return
-
-    print("[INFO] Dashboard carregado e Detalhes abertos. Monitorando...")
 
     try:
         while True:
